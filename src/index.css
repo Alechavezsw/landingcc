@@ -1,20 +1,19 @@
-/* refined v2 Design System */
+/* refined v3 Organic & Dynamic Design System */
 @import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@100,200,300,400,500,700,800,900&display=swap');
 
 :root {
   --primary: #af49ff;
-  --primary-faint: rgba(175, 73, 255, 0.1);
-  --primary-solid: #9c27ff;
-  --bg-deep: #050505;
-  --bg-surface: #0a0a0b;
-  --text-primary: #ffffff;
-  --text-secondary: #999999;
-  --text-muted: #666666;
-  --border-glass: rgba(255, 255, 255, 0.05);
-  --border-active: rgba(175, 73, 255, 0.3);
-  --font-cabinet: 'Cabinet Grotesk', sans-serif;
-  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
-  --transition-main: all 0.6s var(--ease-expo);
+  --primary-glow: #9c27ff;
+  --accent: #50e3c2;
+  /* Adding a fresh secondary color for "growth" */
+  --bg-dark: #07060a;
+  --bg-deep: #030205;
+  --text-pure: #ffffff;
+  --text-soft: rgba(255, 255, 255, 0.7);
+  --glass: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.08);
+  --font-main: 'Cabinet Grotesk', sans-serif;
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 * {
@@ -25,124 +24,109 @@
 
 body {
   background-color: var(--bg-deep);
-  color: var(--text-primary);
-  font-family: var(--font-cabinet);
-  line-height: 1.5;
+  color: var(--text-pure);
+  font-family: var(--font-main);
+  line-height: 1.4;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Noise Texture Overlay */
-body::before {
-  content: "";
+/* Floating Shapes Background */
+.mesh-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  z-index: -1;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, var(--bg-dark) 0%, var(--bg-deep) 100%);
+}
+
+.blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: var(--primary);
+  filter: blur(120px);
   opacity: 0.15;
-  pointer-events: none;
-  z-index: 9999;
+  border-radius: 50%;
+  animation: float 20s infinite alternate;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(-10%, -10%) scale(1);
+  }
+
+  100% {
+    transform: translate(20%, 30%) scale(1.2);
+  }
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 30px;
 }
 
 h1,
 h2,
 h3 {
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.04em;
-  text-transform: uppercase;
 }
 
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
+.title-xl {
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  line-height: 1;
 }
 
-/* Sophisticated Glass */
-.glass-v2 {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-glass);
-  border-radius: 2px;
-  /* Sharper, more modern look */
-  transition: var(--transition-main);
+/* Organic Cards */
+.organic-card {
+  background: var(--glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  padding: 50px;
+  transition: all 0.5s var(--ease);
 }
 
-.glass-v2:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: var(--border-active);
+.organic-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Typography Utilities */
-.text-huge {
-  font-size: clamp(3rem, 12vw, 10rem);
-  line-height: 0.9;
-}
-
-.text-gradient {
-  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.4) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.btn-minimal {
+/* Buttons */
+.btn-fancy {
+  position: relative;
   background: white;
   color: black;
-  border: none;
-  padding: 18px 40px;
+  padding: 16px 36px;
+  border-radius: 99px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.75rem;
-  transition: var(--transition-main);
-  border-radius: 0;
-  /* Square edges for premium feel */
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: none;
 }
 
-.btn-minimal:hover {
+.btn-fancy:hover {
   background: var(--primary);
   color: white;
   transform: scale(1.05);
+  box-shadow: 0 10px 30px var(--primary-glow);
 }
 
-.btn-outline {
-  background: transparent;
-  color: white;
-  border: 1px solid white;
-  padding: 18px 40px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.75rem;
-  transition: var(--transition-main);
+.accent-text {
+  color: var(--primary);
 }
 
-.btn-outline:hover {
-  background: white;
-  color: black;
-}
-
-/* Grid layout for services */
-.services-grid-v2 {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 20px;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 20px;
-  }
-
-  .text-huge {
-    font-size: 4rem;
-  }
-
-  .services-grid-v2 {
-    display: flex;
-    flex-direction: column;
-  }
+section {
+  padding: 120px 0;
 }
