@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const Navbar = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 50);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     return (
-        <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-black/80 backdrop-blur-md py-4 border-b border-white/5' : 'bg-transparent py-8'}`}>
-            <div className="container flex justify-between items-center text-xs font-black tracking-widest uppercase">
+        <nav className="fixed top-0 left-0 w-full z-50 mix-blend-difference py-10">
+            <div className="container flex justify-between items-baseline">
+                <div className="flex flex-col">
+                    <span className="text-xl font-black tracking-tighter">COSECHA CREATIVA</span>
+                    <span className="label-mono opacity-50">Studio.v04</span>
+                </div>
+
+                <div className="hidden md:flex gap-16">
+                    {['Expertise', 'Intelligence', 'Network', 'Connect'].map((item, idx) => (
+                        <a
+                            key={item}
+                            href={`#${item.toLowerCase()}`}
+                            className="label-mono text-white hover:text-[#af49ff] transition-colors"
+                        >
+                            <span className="opacity-20 mr-2">0{idx + 1}</span>
+                            {item}
+                        </a>
+                    ))}
+                </div>
+
                 <div className="flex items-center gap-4">
-                    <span className="text-white hover:text-[#af49ff] transition-colors cursor-pointer">Cosecha Creativa</span>
+                    <div className="w-2 h-2 rounded-full bg-[#af49ff] animate-pulse"></div>
+                    <span className="label-mono">Live</span>
                 </div>
-
-                <div className="hidden md:flex gap-12 text-white/50">
-                    <a href="#inicio" className="hover:text-white transition-colors">Intro</a>
-                    <a href="#servicios" className="hover:text-white transition-colors">Expertise</a>
-                    <a href="#ai" className="hover:text-white transition-colors">Intelligence</a>
-                    <a href="#contacto" className="hover:text-white transition-colors">Connect</a>
-                </div>
-
-                <button className="text-white border border-white/20 px-6 py-2 hover:bg-white hover:text-black transition-all">
-                    Menu
-                </button>
             </div>
         </nav>
     );

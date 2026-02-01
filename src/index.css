@@ -1,19 +1,21 @@
-/* refined v3 Organic & Dynamic Design System */
-@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@100,200,300,400,500,700,800,900&display=swap');
+/* Architectural Precision v4 */
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@100,400,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
 :root {
   --primary: #af49ff;
-  --primary-glow: #9c27ff;
-  --accent: #50e3c2;
-  /* Adding a fresh secondary color for "growth" */
-  --bg-dark: #07060a;
-  --bg-deep: #030205;
-  --text-pure: #ffffff;
-  --text-soft: rgba(255, 255, 255, 0.7);
-  --glass: rgba(255, 255, 255, 0.03);
-  --border: rgba(255, 255, 255, 0.08);
-  --font-main: 'Cabinet Grotesk', sans-serif;
-  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --primary-faded: rgba(175, 73, 255, 0.1);
+  --bg-pure: #000000;
+  --bg-elevated: #080808;
+  --text-main: #ffffff;
+  --text-secondary: #888888;
+  --text-muted: #444444;
+  --border-dim: rgba(255, 255, 255, 0.05);
+  --border-focus: rgba(175, 73, 255, 0.5);
+  --font-cabinet: 'Cabinet Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --spacing-unit: 8px;
+  --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
 }
 
 * {
@@ -23,110 +25,127 @@
 }
 
 body {
-  background-color: var(--bg-deep);
-  color: var(--text-pure);
-  font-family: var(--font-main);
-  line-height: 1.4;
+  background-color: var(--bg-pure);
+  color: var(--text-main);
+  font-family: var(--font-cabinet);
+  line-height: 1.2;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Floating Shapes Background */
-.mesh-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-  background: radial-gradient(circle at 50% 50%, var(--bg-dark) 0%, var(--bg-deep) 100%);
-}
-
-.blob {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: var(--primary);
-  filter: blur(120px);
-  opacity: 0.15;
-  border-radius: 50%;
-  animation: float 20s infinite alternate;
-}
-
-@keyframes float {
-  0% {
-    transform: translate(-10%, -10%) scale(1);
-  }
-
-  100% {
-    transform: translate(20%, 30%) scale(1.2);
-  }
+/* Precision Dot Grid Background */
+.app-container {
+  min-height: 100vh;
+  background-image: radial-gradient(var(--text-muted) 0.5px, transparent 0.5px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
 }
 
 .container {
-  max-width: 1300px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 40px;
 }
 
-h1,
-h2,
-h3 {
-  font-weight: 800;
+/* Typography Scale */
+h1 {
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 900;
   letter-spacing: -0.04em;
 }
 
-.title-xl {
-  font-size: clamp(3.5rem, 10vw, 8rem);
-  line-height: 1;
-}
-
-/* Organic Cards */
-.organic-card {
-  background: var(--glass);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--border);
-  border-radius: 32px;
-  padding: 50px;
-  transition: all 0.5s var(--ease);
-}
-
-.organic-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-10px);
-  border-color: var(--primary);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-/* Buttons */
-.btn-fancy {
-  position: relative;
-  background: white;
-  color: black;
-  padding: 16px 36px;
-  border-radius: 99px;
+h3 {
+  font-size: 1.5rem;
   font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.8rem;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.btn-fancy:hover {
-  background: var(--primary);
-  color: white;
-  transform: scale(1.05);
-  box-shadow: 0 10px 30px var(--primary-glow);
-}
-
-.accent-text {
+  letter-spacing: 0.4em;
   color: var(--primary);
 }
 
+/* Surgical Grid Components */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1px;
+  background-color: var(--border-dim);
+  border: 1px solid var(--border-dim);
+}
+
+.bento-item {
+  background-color: var(--bg-pure);
+  padding: 60px;
+  transition: background-color 0.4s ease;
+}
+
+.bento-item:hover {
+  background-color: var(--bg-elevated);
+}
+
+/* Minimalist Surgical Buttons */
+.btn-precision {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 24px 48px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-in-out-expo);
+}
+
+.btn-precision:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px var(--primary-faded);
+  background: white;
+  color: black;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 1px solid var(--border-dim);
+  padding: 24px 48px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  border-color: white;
+}
+
 section {
-  padding: 120px 0;
+  padding: 160px 0;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.glow-surgical {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: var(--primary);
+  filter: blur(160px);
+  opacity: 0.1;
+  pointer-events: none;
 }
