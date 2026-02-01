@@ -1,16 +1,20 @@
-/* CSS Design System and Global Styles */
+/* refined v2 Design System */
 @import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@100,200,300,400,500,700,800,900&display=swap');
 
 :root {
   --primary: #af49ff;
-  --primary-glow: rgba(175, 73, 255, 0.4);
-  --bg-dark: #0a0a0c;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --text-main: #f0f0f0;
-  --text-dim: #a0a0a0;
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --font-main: 'Cabinet Grotesk', sans-serif;
-  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --primary-faint: rgba(175, 73, 255, 0.1);
+  --primary-solid: #9c27ff;
+  --bg-deep: #050505;
+  --bg-surface: #0a0a0b;
+  --text-primary: #ffffff;
+  --text-secondary: #999999;
+  --text-muted: #666666;
+  --border-glass: rgba(255, 255, 255, 0.05);
+  --border-active: rgba(175, 73, 255, 0.3);
+  --font-cabinet: 'Cabinet Grotesk', sans-serif;
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --transition-main: all 0.6s var(--ease-expo);
 }
 
 * {
@@ -20,66 +24,125 @@
 }
 
 body {
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  font-family: var(--font-main);
-  line-height: 1.6;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-cabinet);
+  line-height: 1.5;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 800;
-  letter-spacing: -0.02em;
+/* Noise Texture Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 9999;
 }
 
-/* Glassmorphism Utility */
-.glass {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
+h1,
+h2,
+h3 {
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Sophisticated Glass */
+.glass-v2 {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  border-radius: 2px;
+  /* Sharper, more modern look */
+  transition: var(--transition-main);
+}
+
+.glass-v2:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-active);
+}
+
+/* Typography Utilities */
+.text-huge {
+  font-size: clamp(3rem, 12vw, 10rem);
+  line-height: 0.9;
+}
+
+.text-gradient {
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.4) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
-.glow {
-  box-shadow: 0 0 40px var(--primary-glow);
-}
-
-.section-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 100px 24px;
-}
-
-section {
-  position: relative;
-}
-
-button {
-  cursor: pointer;
-  font-family: var(--font-main);
-  font-weight: 600;
-  transition: var(--transition-smooth);
-}
-
-.btn-primary {
-  background-color: var(--primary);
-  color: white;
+.btn-minimal {
+  background: white;
+  color: black;
   border: none;
-  padding: 12px 28px;
-  border-radius: 99px;
-  font-size: 1rem;
+  padding: 18px 40px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  transition: var(--transition-main);
+  border-radius: 0;
+  /* Square edges for premium feel */
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px var(--primary-glow);
+.btn-minimal:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.05);
+}
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 18px 40px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  transition: var(--transition-main);
+}
+
+.btn-outline:hover {
+  background: white;
+  color: black;
+}
+
+/* Grid layout for services */
+.services-grid-v2 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .text-huge {
+    font-size: 4rem;
+  }
+
+  .services-grid-v2 {
+    display: flex;
+    flex-direction: column;
+  }
 }

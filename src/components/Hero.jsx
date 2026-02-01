@@ -1,75 +1,57 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Bot, Rocket, Sparkles } from 'lucide-react';
 
 const Hero = () => {
     return (
-        <section id="inicio" className="min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-            {/* Background Decorative Elements */}
-            <div className="absolute top-1/4 -left-20 w-80 h-80 bg-[#af49ff] opacity-10 blur-[120px] rounded-full"></div>
-            <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-[#af49ff] opacity-10 blur-[120px] rounded-full"></div>
+        <section id="inicio" className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-32">
+            {/* Subtle Background Glow */}
+            <div className="absolute top-0 right-[-10%] w-[50%] h-[50%] bg-[#af49ff] opacity-[0.03] blur-[150px] rounded-full"></div>
 
-            <div className="section-container relative z-10 text-center">
+            <div className="container relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-pulse">
-                        <Sparkles size={16} className="text-[#af49ff]" />
-                        <span className="text-xs font-semibold tracking-wider text-[#af49ff]">POTENCIADO POR IA</span>
+                    <div className="flex flex-col md:flex-row items-end gap-4 mb-2">
+                        <span className="text-xs font-bold tracking-[0.5em] text-[#af49ff] uppercase">Creative Studio</span>
+                        <div className="h-[1px] flex-grow bg-white/10 mb-2"></div>
                     </div>
 
-                    <h1 className="text-5xl md:text-8xl leading-tight mb-8 gradient-text">
-                        Cosechamos ideas,<br />
-                        escalamos negocios.
+                    <h1 className="text-huge text-gradient mb-12">
+                        Cosechamos<br />
+                        <span className="md:ml-20">Ideas</span><br />
+                        <span className="italic font-light">Escalamos</span><br />
+                        Mundos.
                     </h1>
 
-                    <p className="text-lg md:text-xl text-dim max-w-2xl mx-auto mb-12">
-                        Somos Cosecha Creativa. Especialistas en marketing digital, desarrollo de software
-                        y automatización inteligente para empresas que buscan el próximo nivel.
-                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start mt-12">
+                        <div className="md:col-start-1 md:col-span-4 self-center">
+                            <p className="text-sm text-secondary leading-relaxed uppercase tracking-wider">
+                                Marketing / Software / AI<br />
+                                Based in Argentina. Working globally.
+                            </p>
+                        </div>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <button className="btn-primary flex items-center gap-2 group">
-                            Nuestros Servicios
-                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                        </button>
-                        <button className="px-8 py-3 rounded-full border border-glass-border hover:bg-white/5 transition-colors">
-                            Ver procesos de IA
-                        </button>
+                        <div className="md:col-start-6 md:col-span-7">
+                            <p className="text-xl md:text-2xl text-white/80 leading-snug mb-10">
+                                Somos una agencia boutique dedicada a transformar la tecnología en ventaja competitiva.
+                                Combinamos inteligencia artificial con diseño disruptivo para crear productos que no solo
+                                funcionan, sino que inspiran.
+                            </p>
+
+                            <div className="flex gap-4">
+                                <button className="btn-minimal">Iniciar Proyecto</button>
+                                <button className="btn-outline">Nuestra Visión</button>
+                            </div>
+                        </div>
                     </div>
                 </motion.div>
+            </div>
 
-                {/* Feature widgets */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-24">
-                    <motion.div
-                        whileHover={{ y: -5 }}
-                        className="glass p-8 text-left group transition-all"
-                    >
-                        <Rocket className="text-[#af49ff] mb-4 group-hover:scale-110 transition-transform" size={32} />
-                        <h3 className="text-xl mb-2 italic">Creatividad sin límites</h3>
-                        <p className="text-sm text-dim">Diseño y marketing que rompe moldes y conecta con tu audiencia.</p>
-                    </motion.div>
-
-                    <motion.div
-                        whileHover={{ y: -5 }}
-                        className="glass p-8 text-left group glow border-[#af49ff]/20"
-                    >
-                        <Bot className="text-[#af49ff] mb-4 group-hover:scale-110 transition-transform" size={32} />
-                        <h3 className="text-xl mb-2">Automatización IA</h3>
-                        <p className="text-sm text-dim">Optimizamos tus ventas y procesos con inteligencia artificial de vanguardia.</p>
-                    </motion.div>
-
-                    <motion.div
-                        whileHover={{ y: -5 }}
-                        className="glass p-8 text-left group transition-all"
-                    >
-                        <Sparkles className="text-[#af49ff] mb-4 group-hover:scale-110 transition-transform" size={32} />
-                        <h3 className="text-xl mb-2">Software a medida</h3>
-                        <p className="text-sm text-dim">Desarrollamos herramientas robustas para que tu empresa nunca se detenga.</p>
-                    </motion.div>
-                </div>
+            {/* Background large text for scale */}
+            <div className="absolute bottom-0 left-0 w-full overflow-hidden whitespace-nowrap opacity-[0.02] pointer-events-none select-none">
+                <span className="text-[25vw] font-black uppercase tracking-tighter">COSECHA CREATIVA</span>
             </div>
         </section>
     );

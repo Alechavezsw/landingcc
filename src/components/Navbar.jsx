@@ -1,83 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
+        const handleScroll = () => setIsScrolled(window.scrollY > 50);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
-        { name: 'Inicio', href: '#inicio' },
-        { name: 'Servicios', href: '#servicios' },
-        { name: 'Procesos AI', href: '#ai' },
-        { name: 'Clientes', href: '#clientes' },
-        { name: 'Contacto', href: '#contacto' },
-    ];
-
     return (
-        <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4 glass mx-4 mt-4' : 'py-6 bg-transparent'
-                }`}
-        >
-            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#af49ff] flex items-center justify-center font-bold text-white">
-                        CC
-                    </div>
-                    <span className="text-xl font-bold tracking-tight">Cosecha Creativa</span>
+        <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-black/80 backdrop-blur-md py-4 border-b border-white/5' : 'bg-transparent py-8'}`}>
+            <div className="container flex justify-between items-center text-xs font-black tracking-widest uppercase">
+                <div className="flex items-center gap-4">
+                    <span className="text-white hover:text-[#af49ff] transition-colors cursor-pointer">Cosecha Creativa</span>
                 </div>
 
-                {/* Desktop Nav */}
-                <div className="hidden md:flex items-center gap-8">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            className="text-sm font-medium hover:text-[#af49ff] transition-colors"
-                        >
-                            {link.name}
-                        </a>
-                    ))}
-                    <a
-                        href="#contacto"
-                        className="btn-primary"
-                        style={{ padding: '8px 20px', fontSize: '0.875rem' }}
-                    >
-                        Empezar
-                    </a>
+                <div className="hidden md:flex gap-12 text-white/50">
+                    <a href="#inicio" className="hover:text-white transition-colors">Intro</a>
+                    <a href="#servicios" className="hover:text-white transition-colors">Expertise</a>
+                    <a href="#ai" className="hover:text-white transition-colors">Intelligence</a>
+                    <a href="#contacto" className="hover:text-white transition-colors">Connect</a>
                 </div>
 
-                {/* Mobile Toggle */}
-                <button
-                    className="md:hidden text-white"
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                >
-                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                <button className="text-white border border-white/20 px-6 py-2 hover:bg-white hover:text-black transition-all">
+                    Menu
                 </button>
             </div>
-
-            {/* Mobile Menu */}
-            {isMenuOpen && (
-                <div className="md:hidden glass absolute top-full left-0 right-0 mt-2 mx-4 p-6 flex flex-col gap-4">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            className="text-lg font-medium"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {link.name}
-                        </a>
-                    ))}
-                </div>
-            )}
         </nav>
     );
 };
